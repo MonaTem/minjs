@@ -1,0 +1,16 @@
+{
+  "name": "lonelyplanet_minjs",
+  "version": "0.1.0",
+  "main": "dist/$.js",
+  "ignore": [
+    "test",
+    "src",
+    ".gitignore",
+    ".travis.yml",
+    "testem.json",
+    "karma.conf.js",
+    "package.json",
+    "Gruntfile.js",
+    "README.md"
+  ]
+}
