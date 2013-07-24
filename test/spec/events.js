@@ -1,4 +1,4 @@
-/*globals $:true*/
+/*globals $$:true*/
 'use strict';
 
 describe('events', function () {
@@ -13,11 +13,11 @@ describe('events', function () {
   });
 
   it('should assign an event to an element', function () {
-    var $body = $('body');
+    var $$body = $$('body');
 
-    $body.on('click', spy);
+    $$body.on('click', spy);
 
-    $body.trigger('click');
+    $$body.trigger('click');
 
     sinon.assert.called(spy);
   });
@@ -39,17 +39,17 @@ describe('events', function () {
   });
 
   it('should not trigger an event on a non-element', function () {
-    $('.this-isnt-on-the-dom').on('event', spy);
+    $$('.this-isnt-on-the-dom').on('event', spy);
 
-    $('.this-isnt-on-the-dom').trigger('event');
+    $$('.this-isnt-on-the-dom').trigger('event');
 
     sinon.assert.notCalled(spy);
   });
 
   it('should assign an event to the internal element', function () {
-    $.on('event', spy);
+    $$.on('event', spy);
 
-    $.trigger('event');
+    $$.trigger('event');
 
     sinon.assert.called(spy);
   });
@@ -62,7 +62,7 @@ describe('events', function () {
     afterEach(destroyDom);
 
     it('should trigger', function () {
-      $('div > a').on('click', spy).trigger('click');
+      $$('div > a').on('click', spy).trigger('click');
       sinon.assert.calledTwice(spy);
     });
 
@@ -76,8 +76,8 @@ describe('events', function () {
     afterEach(destroyDom);
 
     it('should trigger', function () {
-      $('div > a').addEventListener('click', spy);
-      $('div > a').trigger('click');
+      $$('div > a').addEventListener('click', spy);
+      $$('div > a').trigger('click');
       sinon.assert.called(spy);
     });
   });

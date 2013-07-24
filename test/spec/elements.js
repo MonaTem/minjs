@@ -1,4 +1,4 @@
-/*globals appendToDom:true, destroyDom:true, $:true*/
+/*globals appendToDom:true, destroyDom:true, $$:true*/
 'use strict';
 
 describe('elements', function () {
@@ -9,7 +9,7 @@ describe('elements', function () {
   afterEach(destroyDom);
 
   it('should grab an element from the DOM', function () {
-    var link = $('div > a');
+    var link = $$('div > a');
 
     assert(link.outerHTML === '<a></a>');
   });
