@@ -1,11 +1,12 @@
 /*globals Node:true, NodeList:true*/
-$ = (function (document, window, $) {
+$$ = (function (document, window, $$) {
   // Node covers all elements, but also the document objects
   var node = Node.prototype,
       nodeList = NodeList.prototype,
       forEach = 'forEach',
       trigger = 'trigger',
       each = [][forEach],
+      cookies = {},
       // note: createElement requires a string in Firefox
       dummy = document.createElement('i');
 
@@ -49,7 +50,13 @@ $ = (function (document, window, $) {
     return this;
   };
 
-  $ = function (s) {
+
+  // Get a cookie value
+  cookies.get = function(key) {
+    return unescape(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + escape(key).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+  }
+
+  $$ = function (s) {
     // querySelectorAll requires a string with a length
     // otherwise it throws an exception
     var r = document.querySelectorAll(s || '☺'),
@@ -60,10 +67,17 @@ $ = (function (document, window, $) {
     return length == 1 ? r[0] : r;
   };
 
-  // $.on and $.trigger allow for pub/sub type global
+  // $$.on and $$.trigger allow for pub/sub type global
   // custom events.
-  $.on = node.on.bind(dummy);
-  $[trigger] = node[trigger].bind(dummy);
+  $$.on = node.on.bind(dummy);
+  $$[trigger] = node[trigger].bind(dummy);
 
-  return $;
+  $$.cookies = cookies
+
+  if ( typeof define === "function") {
+    define( "jsmin", [], function () { return $$; } );
+  }
+
+  return $$;
 })(document, this);
+
