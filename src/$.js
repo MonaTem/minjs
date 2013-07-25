@@ -50,6 +50,15 @@ $$ = (function (document, window, $$) {
     return this;
   };
 
+  node.find = function (klass) {
+    var r = this.querySelectorAll(klass || '☺'),
+        length = r.length;
+    return length == 1 ? r[0] : r;
+  };
+
+  node.hasClass = function (klass) {
+    return ((" " + element.className + " ").replace(/[\n\t]/g, " ").indexOf(klass) > -1) ? true : false;
+  }
 
   // Get a cookie value
   cookies.get = function(key) {
