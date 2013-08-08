@@ -3,13 +3,14 @@ $ = (function (document, window, $) {
   // Node covers all elements, but also the document objects
   var node = Node.prototype,
       nodeList = NodeList.prototype,
+      htmlCollection = HTMLCollection.prototype,
       forEach = 'forEach',
       trigger = 'trigger',
       each = [][forEach],
       // note: createElement requires a string in Firefox
       dummy = document.createElement('i');
 
-  nodeList[forEach] = each;
+  nodeList[forEach] = htmlCollection[forEach] = each;
 
   // we have to explicitly add a window.on as it's not included
   // in the Node object.
@@ -20,7 +21,7 @@ $ = (function (document, window, $) {
     return this;
   };
 
-  nodeList.on = function (event, fn) {
+  nodeList.on = htmlCollection.on = function (event, fn) {
     this[forEach](function (el) {
       el.on(event, fn);
     });
